@@ -19,7 +19,7 @@ objects:
 - kind: "BuildConfig"
   apiVersion: "v1"
   metadata:
-    name: "chuck-api"
+    name: "chuck-api-int"
     namespace: ${OPS_PROJECT}
   spec:
     runPolicy: "Serial"
