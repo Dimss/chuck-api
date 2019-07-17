@@ -6,6 +6,7 @@ objects:
 - kind: ImageStream
   apiVersion: v1
   metadata:
+    namespace: ${APP_PROJECT}
     name: "chuck-api"
   spec:
     tags:
@@ -19,6 +20,7 @@ objects:
   apiVersion: "v1"
   metadata:
     name: "chuck-api"
+    namespace: ${OPS_PROJECT}
   spec:
     runPolicy: "Serial"
     source:
@@ -34,3 +36,11 @@ objects:
       to:
         kind: "ImageStreamTag"
         name: "chuck-api:latest"
+        namespace: ${APP_PROJECT}
+parameters:
+- description: App project
+  name: APP_PROJECT
+  required: true
+- description: Ops project
+  name: OPS_PROJECT
+  required: true
