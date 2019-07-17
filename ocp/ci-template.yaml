@@ -33,4 +33,4 @@ objects:
     output:
       to:
         kind: "ImageStreamTag"
-        name: "chuck-api:lates"
+        name: "chuck-api:latest"
