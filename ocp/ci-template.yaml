@@ -30,8 +30,7 @@ objects:
       sourceStrategy:
         from:
           kind: "ImageStreamTag"
-          name: "java:latest"
-          namespace: openshift
+          name: "openjdk-11-rhel7:latest"
     output:
       to:
         kind: "ImageStreamTag"
