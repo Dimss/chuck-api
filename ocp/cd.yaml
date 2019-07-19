@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: "chuck-api"
+  namespace: "chuck"
 spec:
   selector:
     app: "chuck-api"
@@ -18,6 +19,7 @@ metadata:
   labels:
     app: "chuck-api"
   name: "chuck-api"
+  namespace: "chuck"
 spec:
   replicas: 1
   template:
@@ -27,21 +29,10 @@ spec:
     spec:
       containers:
       - name: "chuck-api"
-        image: " "
+        image: "dimssss/chuck-api:0.1"
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: prod
-  triggers:
-    - type: "ConfigChange"
-    - type: "ImageChange"
-      imageChangeParams:
-        automatic: true
-        containerNames:
-          - "chuck-api"
-        from:
-          kind: "ImageStreamTag"
-          name: "chuck-api:latest"
-          namespace: "chuck"
