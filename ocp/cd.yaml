@@ -11,7 +11,6 @@ spec:
   - name: http
     port: 80
     targetPort: 8080
-    nodePort: 30081
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
@@ -19,7 +18,9 @@ metadata:
   name: chuck-api
   namespace: chuck
 spec:
-  host: chuck-api-chuck.router.default.svc.cluster.local
+  host: chuck-api.apps.a.okto.ocplab.io
+  tls:
+    termination: edge
   port:
     targetPort: http
   to:
