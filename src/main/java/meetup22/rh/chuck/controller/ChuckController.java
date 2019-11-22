@@ -1,6 +1,8 @@
 package meetup22.rh.chuck.controller;
 
+import meetup22.rh.chuck.model.Joke;
 import meetup22.rh.chuck.payload.ResponsePayload;
+import meetup22.rh.chuck.repository.JokeRepository;
 import meetup22.rh.chuck.service.ChuckClient;
 import meetup22.rh.chuck.service.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/v1")
@@ -17,7 +20,10 @@ public class ChuckController {
     ResponsePayload responsePayload;
 
     @Autowired
-    ChuckClient chuckClient;
+    JokeRepository jokeRepository;
+
+//    @Autowired
+//    ChuckClient chuckClient;
 
     @Autowired
     Translator translator;
@@ -35,8 +41,13 @@ public class ChuckController {
     @GetMapping("/joke")
     @CrossOrigin(origins = "*")
     public ResponseEntity joke() {
-        responsePayload.setData(this.chuckClient.getJoke());
-        return ResponseEntity.ok().body(responsePayload.getJsonPayload());
+        int jokeId = new Random().nextInt(1001);
+
+        Joke j = jokeRepository.findById(jokeId).orElse(null);
+//        responsePayload.setData(this.chuckClient.getJoke());
+//        responsePayload.setData(j).getJsonPayload()
+//        responsePayload.setData(j);
+        return ResponseEntity.ok().body(responsePayload.setData(j).getJsonPayload());
     }
 
     @CrossOrigin(origins = "*")

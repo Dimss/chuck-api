@@ -1,0 +1,1 @@
+docker run -it -p3306:3306 -eMYSQL_USER=mysql -eMYSQL_PASSWORD=mysql -eMYSQL_DATABASE=jokes_db  registry.redhat.io/rhscl/mysql-57-rhel7@sha256:9a781abe7581cc141e14a7e404ec34125b3e89c008b14f4e7b41e094fd3049fe

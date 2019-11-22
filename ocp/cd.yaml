@@ -19,8 +19,6 @@ metadata:
   namespace: chuck
 spec:
   host: chuck-api.apps.a.okto.ocplab.io
-  tls:
-    termination: edge
   port:
     targetPort: http
   to:
