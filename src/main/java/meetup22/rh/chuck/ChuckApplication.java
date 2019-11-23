@@ -9,9 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class ChuckApplication {
@@ -27,9 +26,11 @@ public class ChuckApplication {
         Joke j = jokeRepository.findJokeByJoke("Chuck Norris can change the font of a dot.").orElse(null);
         if (j == null) {
             try {
-                File resource = new ClassPathResource("data/jokes.json").getFile();
+                InputStream resource = new ClassPathResource("data/jokes.json").getInputStream();
                 Gson gson = new Gson();
-                Joke[] jokes = gson.fromJson(new FileReader(resource), Joke[].class);
+                String result = new BufferedReader(new InputStreamReader(resource))
+                        .lines().collect(Collectors.joining("\n"));
+                Joke[] jokes = gson.fromJson(result, Joke[].class);
                 for (Joke current : jokes) {
                     jokeRepository.save(current);
                 }
