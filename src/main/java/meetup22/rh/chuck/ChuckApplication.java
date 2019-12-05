@@ -34,12 +34,9 @@ public class ChuckApplication {
                 for (Joke current : jokes) {
                     jokeRepository.save(current);
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
 }
