@@ -1,6 +1,7 @@
 package meetup22.rh.chuck.controller;
 
 import meetup22.rh.chuck.model.Joke;
+import meetup22.rh.chuck.payload.JokePayload;
 import meetup22.rh.chuck.payload.ResponsePayload;
 import meetup22.rh.chuck.repository.JokeRepository;
 import meetup22.rh.chuck.service.ChuckClient;
@@ -21,6 +22,9 @@ public class ChuckController {
 
     @Autowired
     JokeRepository jokeRepository;
+
+    @Autowired
+    JokePayload jokePayload;
 
 //    @Autowired
 //    ChuckClient chuckClient;
@@ -44,10 +48,13 @@ public class ChuckController {
         int jokeId = new Random().nextInt(1001);
 
         Joke j = jokeRepository.findById(jokeId).orElse(null);
+        jokePayload.setJoke(j.getJoke());
+        jokePayload.setColor("#61ff00");
+//        #ff7700
 //        responsePayload.setData(this.chuckClient.getJoke());
 //        responsePayload.setData(j).getJsonPayload()
 //        responsePayload.setData(j);
-        return ResponseEntity.ok().body(responsePayload.setData(j).getJsonPayload());
+        return ResponseEntity.ok().body(responsePayload.setData(jokePayload).getJsonPayload());
     }
 
     @CrossOrigin(origins = "*")
