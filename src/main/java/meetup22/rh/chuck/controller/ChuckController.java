@@ -7,6 +7,7 @@ import meetup22.rh.chuck.repository.JokeRepository;
 import meetup22.rh.chuck.service.ChuckClient;
 import meetup22.rh.chuck.service.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,9 @@ public class ChuckController {
 
     @Autowired
     JokePayload jokePayload;
+
+    @Value("${app.joke.color}")
+    private String jokeColor;
 
 //    @Autowired
 //    ChuckClient chuckClient;
@@ -49,7 +53,7 @@ public class ChuckController {
 
         Joke j = jokeRepository.findById(jokeId).orElse(null);
         jokePayload.setJoke(j.getJoke());
-        jokePayload.setColor("#61ff00");
+        jokePayload.setColor(jokeColor);
 //        #ff7700
 //        responsePayload.setData(this.chuckClient.getJoke());
 //        responsePayload.setData(j).getJsonPayload()
