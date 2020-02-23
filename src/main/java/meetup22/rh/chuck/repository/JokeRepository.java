@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface JokeRepository extends JpaRepository<Joke, Integer> {
-    @Query("SELECT j FROM Joke j where joke = :joke")
-    Optional<Joke> findJokeByJoke(@Param("joke") String joke);
+//    @Query("SELECT j FROM Joke j where joke = :joke")
+    @Query(nativeQuery=true, value="SELECT * FROM joke ORDER BY RAND() LIMIT 1")
+//    Optional<Joke> findJokeByJoke(@Param("joke") String joke);
+    Optional<Joke> findRandomJoke();
 }

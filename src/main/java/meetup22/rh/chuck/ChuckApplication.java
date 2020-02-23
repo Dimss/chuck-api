@@ -23,7 +23,7 @@ public class ChuckApplication {
 
     @PostConstruct
     public void init() {
-        Joke j = jokeRepository.findJokeByJoke("Chuck Norris can change the font of a dot.").orElse(null);
+        Joke j = jokeRepository.findRandomJoke().orElse(null);
         if (j == null) {
             try {
                 InputStream resource = new ClassPathResource("data/jokes.json").getInputStream();

@@ -51,7 +51,7 @@ public class ChuckController {
     public ResponseEntity joke() {
         int jokeId = new Random().nextInt(1001);
 
-        Joke j = jokeRepository.findById(jokeId).orElse(null);
+        Joke j = jokeRepository.findRandomJoke().orElse(null);
         jokePayload.setJoke(j.getJoke());
         jokePayload.setColor(jokeColor);
 //        #ff7700
