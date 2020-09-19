@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface JokeRepository extends JpaRepository<Joke, Integer> {
 //    @Query("SELECT j FROM Joke j where joke = :joke")
-    @Query(nativeQuery=true, value="SELECT * FROM joke ORDER BY RAND() LIMIT 1")
+    @Query(nativeQuery=true, value="SELECT * FROM joke ORDER BY random() LIMIT 1")
 //    Optional<Joke> findJokeByJoke(@Param("joke") String joke);
     Optional<Joke> findRandomJoke();
 }
